@@ -1,0 +1,75 @@
+.search-bar
+    width: 400px
+    height: 40px
+    display: flex
+    flex-direction: column
+    position: relative
+
+.search-radius
+    border-radius: 15px
+    background-color: white
+    width: 100%
+    position: absolute
+    -webkit-box-shadow: 0px 5px 9px -1px rgba(0,0,0,0.33)
+    -moz-box-shadow: 0px 5px 9px -1px rgba(0,0,0,0.33)
+    box-shadow: 0px 5px 9px -1px rgba(0,0,0,0.33)
+
+.search-wrapper
+    width: 100%
+    display: flex
+    align-items: center
+    position: relative
+
+.search-icon
+    color: rgb(0, 50, 83)
+    margin-left: 1rem
+
+input
+    width: 85%
+    padding: 0.75rem 1rem 0.75rem 1rem
+    background-color: white
+    color: #1e1e1e
+    border: none
+    border-bottom-right-radius: 15px
+    border-top-right-radius: 15px
+
+input:focus
+    outline: none
+
+.close-icon
+    margin-right: 1rem
+    cursor: pointer
+    color: rgb(0, 50, 83)
+
+.options-wrapper
+    width: 100%
+    position: relative
+    z-index: 1
+
+.search-option
+    width: 100%
+
+.search-option button
+    width: 100%
+    background-color: transparent
+    color: #1e1e1e
+    text-align: left
+    padding: 0.75rem 1rem
+    border: none
+
+.search-option button:hover
+    background-color: lightgray
+
+.search-option
+    &:first-child button
+        border-top: 1px solid gray
+
+.search-option
+    &:last-child button
+        border-bottom-left-radius: 15px
+        border-bottom-right-radius: 15px
+
+.search-option
+    &:last-child button:hover
+        border-bottom-left-radius: 15px
+        border-bottom-right-radius: 15px
