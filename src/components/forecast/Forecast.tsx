@@ -1,5 +1,7 @@
 import { forecastType } from "../../types"
 import './Forecast.sass'
+import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa"
+
 
 type Props = {
   data: forecastType
@@ -7,27 +9,68 @@ type Props = {
 
 const Forecast = ({ data }: Props): JSX.Element => {
   const today = data.list[0];
+
+  const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+
+  const getDirection = (angle: number) => {
+    const index = Math.round(((angle %= 360) < 0 ? angle + 360 : angle) / 45) % 8;
+    return directions[index]
+  }
+
   return (
     <>
       <div className="forecast-container">
         <div className="information-wrapper">
           <div className="information-country">
             <h1 className="country-name">{data.name}, {data.country}</h1>
-            <h3 className="country-date">{today.dt_txt.split(" ")[0]}</h3>
-            <h3 className="country-hour">{new Date(today.dt * 1000).getHours()}:00</h3>
+            <div className="country-datetime">
+              <h3 className="country-date">{today.dt_txt.split(" ")[0]}</h3>
+              <h3 className="country-hour">{new Date(today.dt * 1000).getHours()}:00</h3>
+            </div>
           </div>
           <div className="information-weather">
-            <img src={`https://openweathermap.org/img/wn/${today.weather[0].icon}@2x.png`} alt={`weather-icon-${today.weather[0].main}`} />
-            <h2>{Math.round(today.main.temp)}°C</h2>
-            <h2>{today.weather[0].description}</h2>
+            <div className="weather-visual">
+              <img src={`https://openweathermap.org/img/wn/${today.weather[0].icon}@2x.png`} alt={`weather-icon-${today.weather[0].main}`} />
+              <h2 className="weather-description">{today.weather[0].description}</h2>
+            </div>
+            <div className="weather-temperature">
+              <h1 className="weather-now">{Math.round(today.main.temp)}°C</h1>
+              <h3 className="weather-feelslike">Feels like : <span style={{ fontWeight: 600 }}>{Math.round(today.main.feels_like)}°C</span></h3>
+            </div>
           </div>
         </div>
-          <h2>Rain:{today.main.humidity}</h2>
-          <h2>Wind:{today.wind.gust}</h2>
-        <div className="weather-wrapper">
-
+        <hr />
+        <div className="weather-minmax">
+          Today's Temperature
+          <div style={{ display: "flex" }}>
+            <FaLongArrowAltDown />
+            <h3 className="weather-min">{Math.round(today.main.temp_min)}°C</h3>
+          </div>
+          <div className="weather-separator" />
+          <div style={{ display: "flex" }}>
+            <FaLongArrowAltUp />
+            <h3 className="weather-max">{Math.round(today.main.temp_max)}°C</h3>
+          </div>
         </div>
-
+        <hr/>
+        <div className="weather-wrapper">
+          <div className="weather-container">
+            <div className="weather-info">
+              <h2>Humidity: {today.main.humidity}%</h2>
+            </div>
+            <div className="weather-info">
+              <h2>Wind: {today.wind.gust} m/s {getDirection(today.wind.deg)}</h2>
+            </div>
+          </div>
+          <div className="weather-container">
+            <div className="weather-info">
+              <h2>Pressure: {today.main.pressure} hPa</h2>
+            </div>
+            <div className="weather-info">
+              <h2>Visibility: {(today.visibility / 1000).toFixed(1)} km</h2>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

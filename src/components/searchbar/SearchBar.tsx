@@ -27,13 +27,11 @@ const SearchBar = ({ search, options, onOptionSelect, handleChange, handleDelete
                     <div className="options-wrapper">
                         {Array.isArray(options) ? options.map((option: optionType, idx: number) => {
                             return (
-                                <>
-                                    <div className="search-option" key={idx}>
-                                        <button onClick={() => onOptionSelect(option)}>
-                                            {option.name}, {option.country}
-                                        </button>
-                                    </div>
-                                </>
+                                <div className="search-option" key={idx}>
+                                    <button onClick={() => onOptionSelect(option)}>
+                                        {option.name}, {option.country}
+                                    </button>
+                                </div>
                             )
                         })
                             : null}
