@@ -2,17 +2,25 @@ import { useState } from "react";
 import './WeatherAccordion.sass'
 import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa"
 
-const WeatherAccordion = () => {
+type CurrentState = {
+  className: string
+}
+
+const WeatherAccordion = ( {className}: CurrentState ) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="accordion">
+    <div className={`accordion ${className}`}>
       <div className="accordion-header" onClick={() => setIsOpen(!isOpen)}>
         <h4>Mon,Feb 19</h4>
-        <div className="temperature-daily">
-          <img src={`https://openweathermap.org/img/wn/01d@2x.png`} />
-          <p>10°C | 10°C</p>
-        </div>
-        <p className="temperature-description">rainy</p>
+        {isOpen ? null :
+          <>
+            <div className="temperature-daily">
+              <img src={`https://openweathermap.org/img/wn/01d@2x.png`} />
+              {<p>10°C | 10°C</p>}
+            </div>
+            <p className="temperature-description">rainy</p>
+          </>
+        }
         {isOpen ?
           <FaCaretSquareUp />
           :

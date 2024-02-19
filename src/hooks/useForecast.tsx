@@ -30,7 +30,6 @@ const useForecast = () => {
     const onOptionSelect = (option: optionType) => {
         getForecast(option);
         setCity(option);
-
     }
 
     useEffect(() => {
@@ -49,6 +48,7 @@ const useForecast = () => {
                     list: data.list
                 }
                 setForecast(forecastData);
+                
             })
     }
 
@@ -56,9 +56,11 @@ const useForecast = () => {
         search,
         options,
         forecast,
+        setForecast,
         handleChange,
         onOptionSelect,
-        handleDeleteText
+        handleDeleteText,
+
     }
 }
 
