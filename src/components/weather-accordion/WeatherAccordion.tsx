@@ -2,14 +2,10 @@ import { useState } from "react";
 import './WeatherAccordion.sass'
 import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa"
 
-type CurrentState = {
-  className: string
-}
-
-const WeatherAccordion = ( {className}: CurrentState ) => {
+const WeatherAccordion = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className={`accordion ${className}`}>
+    <div className={`accordion`}>
       <div className="accordion-header" onClick={() => setIsOpen(!isOpen)}>
         <h4>Mon,Feb 19</h4>
         {isOpen ? null :
