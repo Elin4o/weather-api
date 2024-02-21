@@ -1,44 +1,40 @@
-import { useEffect } from 'react';
 import './App.sass'
 import Forecast from './components/forecast/Forecast';
 import SearchBar from './components/searchbar/SearchBar'
+import { getCurrentLocation } from './helpers';
 import useForecast from './hooks/useForecast'
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
 function App() {
-    const { search, options, forecast, handleChange, onOptionSelect, handleDeleteText,setForecast } = useForecast();
+    const { search, options, forecast, units, handleChange, onOptionSelect, handleDeleteText, getMainCityForecast, handleMetricsChange } = useForecast();
 
-    useEffect(() => {
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${42.701111}&lon=${25.897850}&units=metric&appid=${import.meta.env.VITE_API_KEY}`)
-        .then(response => response.json())
-        .then(data => {
-            const forecastData = {
-                ...data.city,
-                list: data.list
-            }
-            setForecast(forecastData);
-        })
-    }, [])
-    
+    getMainCityForecast()
+
+    if (units === "metric") {
+        document.getElementById("celsius")?.classList.add("units-active")
+        document.getElementById("farenheit")?.classList.remove("units-active")
+    } else {
+        document.getElementById("farenheit")?.classList.add("units-active")
+        document.getElementById("celsius")?.classList.remove("units-active")
+    }
 
     return (
         <>
             <div className='App'>
-                <header className='search'>
-                    <SearchBar search={search} options={options} onOptionSelect={onOptionSelect} handleChange={handleChange} handleDeleteText={handleDeleteText}/>
-                    <div className='language-select'>
-                        <div>
-                            
-                        </div>
+                <header className='header'>
+                    <SearchBar search={search} options={options} onOptionSelect={onOptionSelect} handleChange={handleChange} handleDeleteText={handleDeleteText} />
+                    <div className='metrics-select' onClick={handleMetricsChange}>
+                        <div id='celsius'>°C</div>
+                        /
+                        <div id='farenheit'>°F</div>
                     </div>
-                    <div className='metrics-select'>
-                        <div>
-                            
-                        </div>
+                    <div className='current-location'>
+                        <FaMapMarkerAlt onClick={getCurrentLocation} />
                     </div>
                 </header>
                 <main className='info-container'>
                     <section className='main-weather'>
-                        {forecast ? (<Forecast data={forecast} />) : (<></>)}
+                        {forecast ? (<Forecast data={forecast} unit={units} />) : (null)}
                     </section>
                     <section className='forecast-weather'>
                     </section>

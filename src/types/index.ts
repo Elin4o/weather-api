@@ -10,6 +10,12 @@ export type forecastType = {
     country: string,
     sunrise: number,
     sunset: number,
+    coord: 
+        {
+            lat: number,
+            lon: number,
+        }
+    ,
     list: [
         {
             dt: number,

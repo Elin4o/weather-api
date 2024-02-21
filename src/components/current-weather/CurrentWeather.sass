@@ -8,7 +8,7 @@
     gap: 1rem
     width: 30vw
 
-.current-weather-container hr 
+.current-weather-container hr
     width: 90%
     color: lightgray
 
@@ -25,19 +25,19 @@
 
 .country-datetime
     display: flex
-    flex-wrap: wrap
-    flex-flow: row-reverse wrap-reverse
+    flex-flow: row wrap
     flex-direction: row
-    justify-content: space-between
+    justify-content: left
+    align-items: center
+    margin-top: 0.25rem
+    column-gap: 0.75rem
+    row-gap: 0.375rem
 
 .country-name
     font-size: 2rem
     font-weight: 600
 
-.country-datetime
-    margin-top: 0.25rem
-
-.country-date
+.country-date, .country-day
     margin-top: 0.25rem
     font-size: 1.25rem
     font-weight: 400
@@ -86,7 +86,6 @@
 .weather-feelslike
     font-size: 1.25rem
 
-
 .weather-wrapper
     display: flex
     flex-wrap: wrap
@@ -97,6 +96,8 @@
 .weather-container
     display: flex
     flex-direction: column
+    justify-content: space-between
+    flex-flow: wrap
     font-size: 1.25rem
     line-height: 1.5
     gap: 0.5rem
@@ -109,7 +110,7 @@
     display: flex
     flex-wrap: wrap
     justify-content: space-evenly
-    
+
 .weather-minmax
     display: flex
     justify-content: space-evenly
@@ -119,13 +120,13 @@
 .weather-separator
     border-left: solid #cbcbcb
 
-.weather-min
-
-.weather-max
-
 .weather-sun_rise_set
     display: flex
-    justify-content: space-evenly
+    justify-content: center
     font-size: 1.25rem
-    flex: 1 1
+    column-gap: 1rem
 
+.weather-sun
+    display: flex
+    column-gap: 0.5rem
+    

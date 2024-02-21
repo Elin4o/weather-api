@@ -2,11 +2,47 @@ import { useState } from "react";
 import './WeatherAccordion.sass'
 import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa"
 
-const WeatherAccordion = () => {
+type FutureForecast = {
+  id: number
+} 
+
+const WeatherAccordion = ({id}: FutureForecast): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const toggleForecastPanel = (selectedForecast: string) => {
+    let forecastPanels = document.getElementsByClassName("accordion");
+    let clickedForecast = document.getElementById(selectedForecast);
+
+    if (clickedForecast?.parentElement?.classList.contains("forecast-active")) {
+        clickedForecast?.parentElement?.classList.remove("forecast-active")
+
+        for (let i = 0; i < forecastPanels.length; i++) {
+            if (forecastPanels[i].classList.contains("forecast-active")) {
+                forecastPanels[i].classList.remove("forecast-active")
+                forecastPanels[i].classList.add("forecast-inactive")
+            }
+        }
+    } else {
+        clickedForecast?.parentElement?.classList.add("forecast-active")
+        for (let i = 0; i < forecastPanels.length; i++) {
+            if (forecastPanels[i].classList.contains("forecast-inactive")) {
+                forecastPanels[i].classList.remove("forecast-inactive")
+                forecastPanels[i].classList.add("forecast-active")
+            }
+        }
+    }
+}
+
+  const onWeatherExpand = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.currentTarget as Element;
+    setIsOpen(!isOpen)
+    toggleForecastPanel(target.id)
+    console.log(target.id)
+  }
+
   return (
-    <div className={`accordion`}>
-      <div className="accordion-header" onClick={() => setIsOpen(!isOpen)}>
+    <div className={`accordion forecast-active`}>
+      <div className="accordion-header" id={`${id}`} onClick={onWeatherExpand}>
         <h4>Mon,Feb 19</h4>
         {isOpen ? null :
           <>

@@ -5,14 +5,15 @@ import './Forecast.sass'
 
 
 type Props = {
-  data: forecastType
+  data: forecastType,
+  unit: string
 }
 
-const Forecast = ({ data }: Props): JSX.Element => {
+const Forecast = ({ data, unit }: Props): JSX.Element => {
   return (
     <>
       <div className="forecast">
-        <CurrentWeather data={data} />
+        <CurrentWeather data={data} unit={unit}/>
         <FutureWeather />
       </div>
     </>
