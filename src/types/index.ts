@@ -10,11 +10,11 @@ export type forecastType = {
     country: string,
     sunrise: number,
     sunset: number,
-    coord: 
-        {
-            lat: number,
-            lon: number,
-        }
+    coord:
+    {
+        lat: number,
+        lon: number,
+    }
     ,
     list: [
         {
@@ -47,6 +47,38 @@ export type forecastType = {
             dt_txt: string
         }
     ]
+
+
+}
+
+export type individualForecastType = {
+    dt: number,
+    main: {
+        temp: number,
+        feels_like: number,
+        temp_max: number,
+        temp_min: number,
+        humidity: number,
+        pressure: number,
+    }
+    weather: [
+        {
+            main: string,
+            icon: string,
+            description: string,
+        }
+    ]
+    clouds: {
+        all: number,
+    }
+    wind: {
+        speed: number,
+        gust: number,
+        deg: number
+    }
+    pop: number,
+    visibility: number,
+    dt_txt: string
 
 
 }

@@ -6,9 +6,9 @@ import useForecast from './hooks/useForecast'
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 function App() {
-    const { search, options, forecast, units, handleChange, onOptionSelect, handleDeleteText, getMainCityForecast, handleMetricsChange } = useForecast();
+    const { search, options, forecast, units, handleChange, onOptionSelect, handleDeleteText, handleMetricsChange } = useForecast();
 
-    getMainCityForecast()
+    // getMainCityForecast()
 
     if (units === "metric") {
         document.getElementById("celsius")?.classList.add("units-active")

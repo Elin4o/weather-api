@@ -39,19 +39,19 @@ const useForecast = () => {
         }
     }, [city])
 
-    const getMainCityForecast = () => {
-        useEffect(() => {
-            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${42.701111}&lon=${25.897850}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
-                .then(response => response.json())
-                .then(data => {
-                    const forecastData = {
-                        ...data.city,
-                        list: data.list
-                    }
-                    setForecast(forecastData);
-                })
-        }, [])
-    }
+    // const getMainCityForecast = () => {
+    //     useEffect(() => {
+    //         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${42.701111}&lon=${25.897850}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
+    //             .then(response => response.json())
+    //             .then(data => {
+    //                 const forecastData = {
+    //                     ...data.city,
+    //                     list: data.list
+    //                 }
+    //                 setForecast(forecastData);               
+    //             })
+    //     }, [])
+    // }
 
     const getForecast = (city: optionType) => {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
@@ -69,26 +69,20 @@ const useForecast = () => {
         const nextUnits = units === "metric" ? "imperial" : "metric";
 
         setUnits(nextUnits)
-      
+
     }
 
     useEffect(() => {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${forecast?.coord.lat || 42.701111}&lon=${forecast?.coord.lon || 25.897850}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
-        .then(response => response.json())
-        .then(data => {
-            const forecastData = {
-                ...data.city,
-                list: data.list
-            }
-            setForecast(forecastData);
-            console.log(data)
-            console.log(forecast?.coord.lat)
-        })
+            .then(response => response.json())
+            .then(data => {
+                const forecastData = {
+                    ...data.city,
+                    list: data.list
+                }
+                setForecast(forecastData);
+            })
     }, [units])
-
-
-
-
 
     return {
         search,
@@ -98,7 +92,7 @@ const useForecast = () => {
         handleChange,
         onOptionSelect,
         handleDeleteText,
-        getMainCityForecast,
+        // getMainCityForecast,
         handleMetricsChange
     }
 }

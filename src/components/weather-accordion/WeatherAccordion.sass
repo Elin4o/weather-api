@@ -12,6 +12,11 @@
 .accordion-header h4
     padding: 0.75rem 0
 
+.accordion-header img
+    filter: drop-shadow(1px 1px 2px #222)
+    width: 60px
+    aspect-ratio: 1
+
 .accordion-header:hover
     background-color: lightgray
 
@@ -30,6 +35,8 @@
     display: flex
     justify-content: left
     align-items: center
+    flex-wrap: wrap
+    margin-bottom: 1rem
 
 .weather img
     filter: drop-shadow(1px 1px 2px #222)
@@ -40,3 +47,28 @@
     display: flex
     flex-direction: column
     gap: 0.25rem
+
+.hourly-weather
+    display: flex
+    margin: 1rem
+    justify-content: start
+    overflow-x: scroll
+
+.hourly-container
+    padding: 1rem
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.hourly-container div
+    margin-bottom: 0.5rem
+    justify-content: center
+    align-items: center
+    text-align: center
+
+.hourly-container img
+    filter: drop-shadow(1px 1px 2px #222)
+    width: 100px
+    aspect-ratio: 1
+
