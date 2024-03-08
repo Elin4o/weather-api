@@ -1,38 +1,45 @@
 .App
-  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%)
-  height: 100vh
+  background: linear-gradient(90deg, #74c69d 0%, #2d6a4f 100%)
   font-family: "Montserrat", sans-serif
 
 .header
   display: flex
   justify-content: center
-  padding: 1rem 2rem
-  column-gap: 1rem
+  align-items: center
+  background-color: #1b4332
+  padding: 1rem
+  height: 60px
+  gap: 1rem
 
 .metrics-select
   display: flex
-  background-color: white
   justify-content: center
   align-items: center
-  border-radius: 25px
   column-gap: 0.5rem
-  padding: 0rem 0.75rem 0 0.375rem
+  padding: 0.7rem
+  font-size: 1.6rem
   cursor: pointer
+  color: white
+  font-weight: 600
 
 .units-active
-  background-color: lightgray
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem
-  border-radius: 15px
+  background-color: #74c69d
+  padding: 1rem 0.5rem
+  border-top-right-radius: 5px
+  border-top-left-radius: 20px
+  border-bottom-right-radius: 20px
+  border-bottom-left-radius: 5px
+  color: white
+  transition: all 0.1s ease-in-out 0.1s
 
 .current-location
   display: flex
-  background-color: white
   justify-content: center
   align-items: center
+  font-size: 2.4rem
   border-radius: 25px
-  column-gap: 0.5rem
-  padding: 0rem 0.375rem
   cursor: pointer
+  color: #95d5b2
 
 .info-container
   display: flex

@@ -58,6 +58,8 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
   }
 
   console.log(array)
+  console.log(array.length)
+  console.log(array.length / 2)
 
   return (
     <div className={`accordion forecast-active`}>
@@ -70,10 +72,10 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
         {isOpen ? null :
           <>
             <div className="temperature-daily">
-              <img src={`https://openweathermap.org/img/wn/${array.length > 1 ? array[array.length / 2].weather[0].icon : array[0].weather[0].icon}@2x.png`} />
+              <img src={`https://openweathermap.org/img/wn/${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}@2x.png`} />
               {<p>{Math.round(lowestTemp)}°{unit === "metric" ? "C" : "F"} | {Math.round(highestTemp)}°{unit === "metric" ? "C" : "F"}</p>}
             </div>
-            <p className="temperature-description">{array.length > 1 ? array[array.length / 2].weather[0].main : array[0].weather[0].main}</p>
+            <p className="temperature-description">{array.length > 1 ? array[Math.floor(array.length / 2)].weather[0].main : array[0].weather[0].main}</p>
           </>
         }
         {isOpen ?
@@ -85,9 +87,9 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
 
       {isOpen && <div className="accordion-body">
         <div className="weather">
-          <img src={`https://openweathermap.org/img/wn/${array.length > 1 ? array[array.length / 2].weather[0].icon : array[0].weather[0].icon}@2x.png`} />
+          <img src={`https://openweathermap.org/img/wn/${array.length > 1 ? array[Math.floor(array.length / 2)].weather[0].icon : array[0].weather[0].icon}@2x.png`} />
           <div className="information">
-            <div className="description">{array.length > 1 ? array[array.length / 2].weather[0].main : array[0].weather[0].main}</div>
+            <div className="description">{array.length > 1 ? array[Math.floor(array.length / 2)].weather[0].main : array[0].weather[0].main}</div>
             <div className="temperature">Highest {Math.round(highestTemp)}°{unit === "metric" ? "C" : "F"}, Lowest {Math.round(lowestTemp)}°{unit === "metric" ? "C" : "F"}</div>
           </div>
         </div>
