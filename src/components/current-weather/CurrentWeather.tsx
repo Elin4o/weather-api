@@ -1,7 +1,9 @@
 import { forecastType } from "../../types"
 import './CurrentWeather.sass'
-import { FaSun, FaMoon } from "react-icons/fa"
+import { FaSun, FaMoon, FaEye, FaCloud, FaWind } from "react-icons/fa"
 import { getDirection, getTime, getDayOfWeek } from "../../helpers"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faDroplet, faGauge, faPercentage } from "@fortawesome/free-solid-svg-icons"
 
 
 type Props = {
@@ -23,36 +25,47 @@ const CurrentWeather = ({ data, unit }: Props): JSX.Element => {
             <h3 className="country-hour">{new Date(today.dt * 1000).getHours()}:00</h3>
           </div>
         </div>
+
         <div className="information-wrapper">
           <div className="information-weather">
             <div className="weather-visual">
-              <img src={`https://openweathermap.org/img/wn/${today.weather[0].icon}@2x.png`} alt={`weather-icon-${today.weather[0].main}`} />
+              <img src={`/src/assets/${today.weather[0].icon}.svg`} alt={`weather-icon-${today.weather[0].main}`} />
               <h2 className="weather-description">{today.weather[0].description}</h2>
             </div>
             <div className="weather-temperature">
-              <h1 className="weather-now">{Math.round(today.main.temp)}°{unit === "metric" ? "C" : "F"}</h1>
+              <div className="weather-now">
+                <h1>{Math.round(today.main.temp)}°{unit === "metric" ? "C" : "F"}</h1>
+              </div>
               <h3 className="weather-feelslike">Feels like : <span style={{ fontWeight: 600 }}>{Math.round(today.main.feels_like)}°{unit === "metric" ? "C" : "F"}</span></h3>
             </div>
           </div>
           <div className="weather-wrapper">
-              <div className="weather-info">
-                <h2>Humidity: {today.main.humidity}%</h2>
-              </div>
-              <div className="weather-info">
-                <h2>Wind: {today.wind.gust} {unit === "metric" ? "m/s" : "mph"} {getDirection(today.wind.deg)}</h2>
-              </div>
-              <div className="weather-info">
-                <h2>Pressure: {today.main.pressure} hPa</h2>
-              </div>
-              <div className="weather-info">
-                <h2>Visibility: {(today.visibility / 1000).toFixed(1)} km</h2>
-              </div>
-              <div className="weather-info">
-                <h2>Clouds: {today.clouds.all} %</h2>
-              </div>
+            <div className="weather-info">
+              <span className="fa-layers">
+                <FontAwesomeIcon icon={faDroplet} className="icon-green" />
+                <FontAwesomeIcon icon={faPercentage} fontSize={10} color="#2d6a4f " />
+              </span>
+              <h2>{today.main.humidity}%</h2>
+            </div>
+            <div className="weather-info">
+              <FaWind className="icon-green" />
+              <h2>{today.wind.gust} {unit === "metric" ? "m/s" : "mph"} {getDirection(today.wind.deg)}</h2>
+            </div>
+            <div className="weather-info">
+              <FontAwesomeIcon icon={faGauge} className="icon-green" />
+              <h2>{today.main.pressure} hPa</h2>
+            </div>
+            <div className="weather-info">
+              <FaEye className="icon-green" />
+              <h2> {(today.visibility / 1000).toFixed(1)} km</h2>
+            </div>
+            <div className="weather-info">
+              <FaCloud className="icon-green" />
+              <h2>{today.clouds.all} 
+            %</h2>
+            </div>
           </div>
-          </div>
-          <hr />
+        </div>
           <div className="weather-sun_rise_set">
             <div className="weather-sun">
               <FaSun />
@@ -63,7 +76,7 @@ const CurrentWeather = ({ data, unit }: Props): JSX.Element => {
               <FaMoon />
               <h3 className="weather-sunset">{getTime(data.sunset)}</h3>
             </div>
-        </div>
+          </div>
       </div>
     </>
   )

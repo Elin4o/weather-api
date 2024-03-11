@@ -3,7 +3,7 @@
     flex-direction: column
     justify-content: center
     color: white
-    margin:0 3rem
+    margin: 0 3rem
 
 .current-weather-container hr
 
@@ -20,7 +20,7 @@
 
 .country-datetime
     display: flex
-    justify-content:start
+    justify-content: start
     font-size: calc( 1.6rem + 1vw )
     flex-wrap: wrap
     gap: calc( 1rem + 1vw )
@@ -44,9 +44,10 @@
     justify-content: center
     align-items: center
     margin: 1rem
+    gap: 1rem
+    flex-wrap: wrap
 
 .weather-visual
-    padding: 1rem
     justify-content: space-between
 
 .weather-visual img
@@ -61,12 +62,16 @@
     display: flex
     flex-direction: column
     align-items: center
-    justify-content: space-evenly
-    height: 100%
-
+    justify-content: space-between
 
 .weather-now
+    display: flex
+    justify-content: center
+    align-items: center
     font-size: calc( 3.2rem + 3vw )
+    aspect-ratio: 1 / 1
+    width: calc(150px + 5vw)
+    text-align: center
 
 .weather-feelslike
     font-size: calc( 1.6rem + 1vw )
@@ -74,23 +79,50 @@
 .weather-wrapper
     display: flex
     flex-direction: column
-    justify-content: space-evenly
+    justify-content: space-between
     align-items: flex-start
     font-size: 1.6rem
     font-size: clamp(1.6rem, 0.6052631578947368rem + 1.5789473684210527vw, 2.5rem)
-    margin: 1rem
+    margin: 1rem 3rem 1rem 1rem
     gap: 1rem
 
-.weather-container
-
 .weather-info
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 1rem
 
-.weather-component
-
-.weather-minmax
-
-.weather-separator
+.icon-green
+    color: #d8f3dc
 
 .weather-sun_rise_set
+    display: flex
+    justify-content: space-evenly
+    align-items: center
+    width: 100px
+    font-size: 1.6rem
+    gap: 1rem
+    margin: 1rem auto
 
 .weather-sun
+    display: flex
+    gap: 0.5rem
+
+.weather-separator
+    border-left: 2px solid #fff
+    height: 1.25rem
+
+@media screen and ( max-width: 700px )
+    .information-country
+        justify-content: center
+        align-items: center
+    .weather-wrapper
+        flex-direction: row
+        width: 100%
+        flex-wrap: wrap
+        justify-content: center
+
+    .weather-info
+        flex-direction: column
+
+    

@@ -14,7 +14,7 @@ const Forecast = ({ data, unit }: Props): JSX.Element => {
     <>
       <div className="forecast">
         <CurrentWeather data={data} unit={unit}/>
-        {/* <FutureWeather data={data} unit={unit} /> */}
+        <FutureWeather data={data} unit={unit} />
       </div>
     </>
   )

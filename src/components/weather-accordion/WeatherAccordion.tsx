@@ -72,7 +72,7 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
         {isOpen ? null :
           <>
             <div className="temperature-daily">
-              <img src={`https://openweathermap.org/img/wn/${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}@2x.png`} />
+              <img src={`/src/assets/${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}.svg`} alt={`weather-icon-${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}.svg`} />
               {<p>{Math.round(lowestTemp)}°{unit === "metric" ? "C" : "F"} | {Math.round(highestTemp)}°{unit === "metric" ? "C" : "F"}</p>}
             </div>
             <p className="temperature-description">{array.length > 1 ? array[Math.floor(array.length / 2)].weather[0].main : array[0].weather[0].main}</p>
@@ -87,7 +87,7 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
 
       {isOpen && <div className="accordion-body">
         <div className="weather">
-          <img src={`https://openweathermap.org/img/wn/${array.length > 1 ? array[Math.floor(array.length / 2)].weather[0].icon : array[0].weather[0].icon}@2x.png`} />
+          <img src={`/src/assets/${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}.svg`} alt={`weather-icon-${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}.svg`} />
           <div className="information">
             <div className="description">{array.length > 1 ? array[Math.floor(array.length / 2)].weather[0].main : array[0].weather[0].main}</div>
             <div className="temperature">Highest {Math.round(highestTemp)}°{unit === "metric" ? "C" : "F"}, Lowest {Math.round(lowestTemp)}°{unit === "metric" ? "C" : "F"}</div>
@@ -100,7 +100,7 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
                 {element.dt_txt.split(" ")[1].slice(0, 5)}
               </div>
               <div>
-                <img src={`https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png`} alt={`weather-icon-${element.weather[0].main}`} />
+                <img src={`/src/assets/${element.weather[0].icon}.svg`} alt={`weather-icon-${element.weather[0].main}`} />
               </div>
               <div>
                 Temp: {Math.round(element.main.temp)}°{unit === "metric" ? "C" : "F"}
