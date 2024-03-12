@@ -42,7 +42,13 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
     const target = e.currentTarget as Element;
     setIsOpen(!isOpen)
     toggleForecastPanel(target.id)
-    console.log(target.id)
+
+    if (isOpen) {
+      target.classList.remove("accordion-header-active");
+    }
+    else {
+      target.classList.add("accordion-header-active");
+    }
   }
 
   let lowestTemp = Number.POSITIVE_INFINITY;
@@ -57,9 +63,22 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
     }
   }
 
-  console.log(array)
-  console.log(array.length)
-  console.log(array.length / 2)
+  const moveRight = (e: React.MouseEvent<HTMLElement>) =>{
+    const target = e.currentTarget as Element;
+    target.parentElement!.scrollBy({
+        left: 360,
+        top: 0,
+        behavior: 'smooth'
+    })
+  }
+  const moveLeft = (e: React.MouseEvent<HTMLElement>) =>{
+    const target = e.currentTarget as Element;
+    target.parentElement!.scrollBy({
+      left: -360,
+      top: 0,
+      behavior: 'smooth'
+  })
+  }
 
   return (
     <div className={`accordion forecast-active`}>
@@ -79,9 +98,9 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
           </>
         }
         {isOpen ?
-          <FaCaretSquareUp />
+          <FaCaretSquareUp className="toggle-button"/>
           :
-          <FaCaretSquareDown />
+          <FaCaretSquareDown className="toggle-button"/>
         }
       </div>
 
@@ -90,37 +109,38 @@ const WeatherAccordion = ({ id, array, unit, day }: FutureForecast): JSX.Element
           <img src={`/src/assets/${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}.svg`} alt={`weather-icon-${array.length > 1 ? array[Math.floor(array.length / 2)]?.weather[0].icon : array[0].weather[0].icon}.svg`} />
           <div className="information">
             <div className="description">{array.length > 1 ? array[Math.floor(array.length / 2)].weather[0].main : array[0].weather[0].main}</div>
-            <div className="temperature">Highest {Math.round(highestTemp)}°{unit === "metric" ? "C" : "F"}, Lowest {Math.round(lowestTemp)}°{unit === "metric" ? "C" : "F"}</div>
+            <div className="temperature">Highest <span className="temperature-color">{Math.round(highestTemp)}°{unit === "metric" ? "C" : "F"}</span> , Lowest <span className="temperature-color">{Math.round(lowestTemp)}</span>°{unit === "metric" ? "C" : "F"}</div>
           </div>
         </div>
         <div className="hourly-weather">
-          {array.map((element) =>
-            <div className="hourly-container">
+          <a className="prev" onClick={moveLeft}>&#10094;</a>
+          <a className="next" onClick={moveRight}>&#10095;</a>
+          {array.map((element, index) =>
+            <div className="hourly-container" key={index}>
               <div>
-                {element.dt_txt.split(" ")[1].slice(0, 5)}
+                <span className="value-color">{element.dt_txt.split(" ")[1].slice(0, 5)}</span>
               </div>
               <div>
                 <img src={`/src/assets/${element.weather[0].icon}.svg`} alt={`weather-icon-${element.weather[0].main}`} />
               </div>
               <div>
-                Temp: {Math.round(element.main.temp)}°{unit === "metric" ? "C" : "F"}
+                Temperature: <span className="value-color">{Math.round(element.main.temp)}°{unit === "metric" ? "C" : "F"}</span>
               </div>
               <div>
-                Clouds: {element.clouds.all}%
+                Humidity: <span className="value-color">{element.main.humidity}%</span>
               </div>
               <div>
-                Wind: {element.wind.gust} {unit === "metric" ? "m/s" : "mph"} {getDirection(element.wind.deg)}
+                Wind: <span className="value-color">{element.wind.gust} {unit === "metric" ? "m/s" : "mph"} {getDirection(element.wind.deg)}</span>
               </div>
               <div>
-                Humidity: {element.main.humidity}%
+                Pressure: <span className="value-color">{element.main.pressure} hPa</span>
               </div>
               <div>
-                Pressure: {element.main.pressure} hPa
+                Visibility: <span className="value-color">{(element.visibility / 1000).toFixed(1)} km</span>
               </div>
               <div>
-                Visibility: {(element.visibility / 1000).toFixed(1)} km
+                Clouds: <span className="value-color">{element.clouds.all}%</span>
               </div>
-
             </div>
           )}
         </div>

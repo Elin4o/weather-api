@@ -1,12 +1,11 @@
 import './App.sass'
 import Forecast from './components/forecast/Forecast';
 import SearchBar from './components/searchbar/SearchBar'
-import { getCurrentLocation } from './helpers';
 import useForecast from './hooks/useForecast'
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 function App() {
-    const { search, options, forecast, units, handleChange, onOptionSelect, handleDeleteText, handleMetricsChange } = useForecast();
+    const { search, options, forecast, units, handleChange, onOptionSelect, handleDeleteText, handleMetricsChange, onGetCurrentLocation } = useForecast();
 
     // getMainCityForecast()
 
@@ -29,7 +28,7 @@ function App() {
                         <div id='farenheit'>°F</div>
                     </div>
                     <div className='current-location'>
-                        <FaMapMarkerAlt onClick={getCurrentLocation} />
+                        <FaMapMarkerAlt onClick={onGetCurrentLocation} />
                     </div>
                 </header>
                 <main className='info-container'>
@@ -39,6 +38,10 @@ function App() {
                     <section className='forecast-weather'>
                     </section>
                 </main>
+                <footer className='footer'>
+                    <h3>Created by <a href="https://github.com/Elin4o" className='colored-text'>Elin Nikolov</a></h3>
+                    <h3>SVG weather icons: <a href="https://github.com/basmilius" className='colored-text'>Basmilius</a></h3>
+                </footer>
             </div>
         </>
     )

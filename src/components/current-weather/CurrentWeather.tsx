@@ -23,6 +23,17 @@ const CurrentWeather = ({ data, unit }: Props): JSX.Element => {
             <h3 className="country-day">{getDayOfWeek(today.dt_txt.split(" ")[0])}, {today.dt_txt.split(" ")[0]}</h3>
             <span className="date-separator">|</span>
             <h3 className="country-hour">{new Date(today.dt * 1000).getHours()}:00</h3>
+            <div className="weather-sun_rise_set">
+              <div className="weather-sun">
+                <FaSun />
+                <h3 className="weather-sunrise">{getTime(data.sunrise)}</h3>
+              </div>
+              <div className="weather-separator" />
+              <div className="weather-sun">
+                <FaMoon />
+                <h3 className="weather-sunset">{getTime(data.sunset)}</h3>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -41,42 +52,31 @@ const CurrentWeather = ({ data, unit }: Props): JSX.Element => {
           </div>
           <div className="weather-wrapper">
             <div className="weather-info">
-              <span className="fa-layers">
+              <span className="fa-layers" title="Humidity">
                 <FontAwesomeIcon icon={faDroplet} className="icon-green" />
                 <FontAwesomeIcon icon={faPercentage} fontSize={10} color="#2d6a4f " />
               </span>
               <h2>{today.main.humidity}%</h2>
             </div>
-            <div className="weather-info">
+            <div className="weather-info" title="Wind">
               <FaWind className="icon-green" />
               <h2>{today.wind.gust} {unit === "metric" ? "m/s" : "mph"} {getDirection(today.wind.deg)}</h2>
             </div>
-            <div className="weather-info">
+            <div className="weather-info" title="Pressure">
               <FontAwesomeIcon icon={faGauge} className="icon-green" />
               <h2>{today.main.pressure} hPa</h2>
             </div>
-            <div className="weather-info">
+            <div className="weather-info" title="Visibility">
               <FaEye className="icon-green" />
               <h2> {(today.visibility / 1000).toFixed(1)} km</h2>
             </div>
-            <div className="weather-info">
+            <div className="weather-info" title="Clouds">
               <FaCloud className="icon-green" />
-              <h2>{today.clouds.all} 
-            %</h2>
+              <h2>{today.clouds.all}
+                %</h2>
             </div>
           </div>
         </div>
-          <div className="weather-sun_rise_set">
-            <div className="weather-sun">
-              <FaSun />
-              <h3 className="weather-sunrise">{getTime(data.sunrise)}</h3>
-            </div>
-            <div className="weather-separator" />
-            <div className="weather-sun">
-              <FaMoon />
-              <h3 className="weather-sunset">{getTime(data.sunset)}</h3>
-            </div>
-          </div>
       </div>
     </>
   )

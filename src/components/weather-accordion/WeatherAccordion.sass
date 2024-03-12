@@ -1,16 +1,29 @@
 .accordion
     box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75)
     border-radius: 15px
+    background-color: white
 
 .accordion-header
     display: flex
     justify-content: space-between
     align-items: center
     border-radius: 15px
-    padding: 0.5rem 1rem
+    padding:1rem
+    color: #1b4332
+    cursor: pointer
+
+.accordion-header-active
+    background-color: #1b4332
+    color: white
+    cursor: pointer
+
+.accordion-header-active:hover
+    background-color: #1b4332 !important
 
 .accordion-header h4
     padding: 0.75rem 0
+    margin-left: 0.5rem
+    font-size: calc(1.4rem + 1vw)
 
 .accordion-header img
     filter: drop-shadow(1px 1px 2px #222)
@@ -18,18 +31,28 @@
     aspect-ratio: 1
 
 .accordion-header:hover
-    background-color: lightgray
+    background-color: #d8f3dc
 
 .temperature-daily
     display: flex
     align-items: center
+    font-size: calc(1.4rem + 1vw)
 
 .temperature-daily img
     width: 40px
     aspect-ratio: 1
 
+.temperature-description
+    font-size: calc(1.4rem + 1vw)
+
+.toggle-button
+    font-size: 2.1rem
+    margin-right: 1rem
+
 .accordion-body
     padding: 1rem
+    position: relative
+    transition: all .35s ease-in-out
 
 .weather
     display: flex
@@ -40,19 +63,31 @@
 
 .weather img
     filter: drop-shadow(1px 1px 2px #222)
-    width: 60px
+    width: 90px
     aspect-ratio: 1
 
 .information
     display: flex
     flex-direction: column
     gap: 0.25rem
+    font-size: calc(1.4rem + 1vw)
+
+.description
+    color: #40916c
+    font-weight: 600
+
+.temperature-color
+    color: #40916c
+    font-weight: 600
 
 .hourly-weather
     display: flex
     margin: 1rem
     justify-content: start
     overflow-x: scroll
+    scrollbar-width: none
+    font-size: 1.6rem
+
 
 .hourly-container
     padding: 1rem
@@ -60,6 +95,10 @@
     flex-direction: column
     justify-content: center
     align-items: center
+    min-width: 160px
+    gap: 1rem
+    text-align: start
+
 
 .hourly-container div
     margin-bottom: 0.5rem
@@ -72,3 +111,38 @@
     width: 100px
     aspect-ratio: 1
 
+.value-color
+    color: #40916c
+    font-weight: 600
+
+.prev, .next
+    cursor: pointer
+    position: absolute
+    top: 50%
+    width: auto
+    margin-top: -22px
+    padding: 16px
+    color: black
+    font-weight: bold
+    font-size: 18px
+    transition: 0.6s ease
+    border-radius: 0 3px 3px 0
+    user-select: none
+    z-index: 2
+
+.next
+    right: 16px
+    border-radius: 3px 0 0 3px
+
+.prev:hover, .next:hover
+    background-color: rgba(185, 185, 185, 0.44)
+
+.fade
+    animation-name: fade
+    animation-duration: 1.5s
+
+@keyframes fade
+    0%
+        transform: opacity(0.4)
+    100%
+        transform: opacity(1 )

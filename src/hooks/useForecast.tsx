@@ -28,7 +28,7 @@ const useForecast = () => {
     }
 
     const onOptionSelect = (option: optionType) => {
-        getForecast(option);
+        getCityForecast(option);
         setCity(option);
     }
 
@@ -39,22 +39,18 @@ const useForecast = () => {
         }
     }, [city])
 
-    // const getMainCityForecast = () => {
-    //     useEffect(() => {
-    //         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${42.701111}&lon=${25.897850}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 const forecastData = {
-    //                     ...data.city,
-    //                     list: data.list
-    //                 }
-    //                 setForecast(forecastData);               
-    //             })
-    //     }, [])
-    // }
+    const getCityForecast = (city: optionType) => {
+        getForecast(city.lat, city.lon)
+    }
 
-    const getForecast = (city: optionType) => {
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
+    const onGetCurrentLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => getForecast(position.coords.latitude,position.coords.longitude));
+        }
+    }
+
+    const getForecast = (lat: number, lon: number) => {
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
             .then(response => response.json())
             .then(data => {
                 const forecastData = {
@@ -64,16 +60,26 @@ const useForecast = () => {
                 setForecast(forecastData);
             })
     }
+    // const getForecast = (city: optionType) => {
+    //     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             const forecastData = {
+    //                 ...data.city,
+    //                 list: data.list
+    //             }
+    //             setForecast(forecastData);
+    //         })
+    // }
 
     const handleMetricsChange = async () => {
         const nextUnits = units === "metric" ? "imperial" : "metric";
 
         setUnits(nextUnits)
-
     }
 
     useEffect(() => {
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${forecast?.coord.lat || 42.701111}&lon=${forecast?.coord.lon || 25.897850}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${forecast?.coord.lat || 42.698334}&lon=${forecast?.coord.lon || 23.319941}&units=${units}&appid=${import.meta.env.VITE_API_KEY}`)
             .then(response => response.json())
             .then(data => {
                 const forecastData = {
@@ -91,6 +97,7 @@ const useForecast = () => {
         units,
         handleChange,
         onOptionSelect,
+        onGetCurrentLocation,
         handleDeleteText,
         // getMainCityForecast,
         handleMetricsChange

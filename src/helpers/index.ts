@@ -34,12 +34,6 @@ export const getTime = (utc: number) => {
     return hours.slice(-2) + ':' + minutes.slice(-2);
 }
 
-export const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => console.log(position.coords.latitude + " " + position.coords.longitude));
-    }
-}
-
 export const getAverageHumidity = (array: Array<individualForecastType>) => {
     let sum = 0;
     for (let index = 0; index < array.length; index++) {
@@ -48,3 +42,4 @@ export const getAverageHumidity = (array: Array<individualForecastType>) => {
 
     return sum / array.length;
 }
+

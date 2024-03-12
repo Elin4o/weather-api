@@ -20,7 +20,7 @@ const SearchBar = ({ search, options, onOptionSelect, handleChange, handleDelete
                     <div className="search-wrapper">
                         <FaSearch className="search-icon" />
                         <input type="search" placeholder="Search for a city" value={search} onChange={handleChange} />
-                        {options.length ? (
+                        {search ? (
                             <FaTimes className="close-icon" onClick={handleDeleteText} />
                         ) : null}
                     </div>
